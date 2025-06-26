@@ -4,7 +4,7 @@ import axios from 'axios'
 
 export const userDataContext = createContext()
 function UserContext({children}) {
-    let [userData,setUserData] = useState("")
+    let [userData, setUserData] = useState(undefined)
     let {serverUrl} = useContext(authDataContext)
 
 
