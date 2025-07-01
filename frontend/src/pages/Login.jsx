@@ -19,7 +19,7 @@ function Login() {
         let [email,setEmail] = useState("")
         let [password,setPassword] = useState("")
         let {serverUrl} = useContext(authDataContext)
-        let {getCurrentUser} = useContext(userDataContext)
+        let {getCurrentUser,setUserData} = useContext(userDataContext)
         let [loading,setLoading] = useState(false)
 
     let navigate = useNavigate()
@@ -32,6 +32,9 @@ function Login() {
                 email,password
             },{withCredentials:true})
             console.log(result.data)
+            if(result.data){
+              setUserData(result.data)
+            }
             await getCurrentUser()
             setLoading(false)
             toast.success("User Login Successful")
@@ -50,6 +53,9 @@ function Login() {
     
                 const result = await axios.post(serverUrl + "/api/auth/googlelogin" ,{name , email} , {withCredentials:true})
                 console.log(result.data)
+                if(result.data){
+                  setUserData(result.data)
+                }
                 await getCurrentUser()
                 setLoading(false)
                 toast.success("User Login Successful")
