@@ -33,7 +33,7 @@ function App() {
           path='/login'
           element={
             userData ? (
-              <Navigate to={location.state?.from || '/'} />
+              <Navigate to={location.state?.from || '/'} replace />
             ) : (
               <Login />
             )
@@ -43,7 +43,7 @@ function App() {
           path='/signup'
           element={
             userData ? (
-              <Navigate to={location.state?.from || '/'} />
+              <Navigate to={location.state?.from || '/'} replace />
             ) : (
               <Registration />
             )
@@ -55,7 +55,7 @@ function App() {
             userData ? (
               <Home />
             ) : (
-              <Navigate to='/login' state={{ from: location.pathname }} />
+              <Navigate to='/login' state={{ from: location.pathname }} replace />
             )
           }
         />
@@ -65,7 +65,7 @@ function App() {
             userData ? (
               <About />
             ) : (
-              <Navigate to='/login' state={{ from: location.pathname }} />
+              <Navigate to='/login' state={{ from: location.pathname }} replace />
             )
           }
         />
@@ -75,7 +75,7 @@ function App() {
             userData ? (
               <Collections />
             ) : (
-              <Navigate to='/login' state={{ from: location.pathname }} />
+              <Navigate to='/login' state={{ from: location.pathname }} replace />
             )
           }
         />
@@ -85,7 +85,7 @@ function App() {
             userData ? (
               <Product />
             ) : (
-              <Navigate to='/login' state={{ from: location.pathname }} />
+              <Navigate to='/login' state={{ from: location.pathname }} replace />
             )
           }
         />
@@ -95,7 +95,7 @@ function App() {
             userData ? (
               <Contact />
             ) : (
-              <Navigate to='/login' state={{ from: location.pathname }} />
+              <Navigate to='/login' state={{ from: location.pathname }} replace />
             )
           }
         />
@@ -105,7 +105,7 @@ function App() {
             userData ? (
               <ProductDetail />
             ) : (
-              <Navigate to='/login' state={{ from: location.pathname }} />
+              <Navigate to='/login' state={{ from: location.pathname }} replace />
             )
           }
         />
@@ -115,7 +115,7 @@ function App() {
             userData ? (
               <Cart />
             ) : (
-              <Navigate to='/login' state={{ from: location.pathname }} />
+              <Navigate to='/login' state={{ from: location.pathname }} replace />
             )
           }
         />
@@ -125,7 +125,7 @@ function App() {
             userData ? (
               <PlaceOrder />
             ) : (
-              <Navigate to='/login' state={{ from: location.pathname }} />
+              <Navigate to='/login' state={{ from: location.pathname }} replace />
             )
           }
         />
@@ -135,7 +135,7 @@ function App() {
             userData ? (
               <Order />
             ) : (
-              <Navigate to='/login' state={{ from: location.pathname }} />
+              <Navigate to='/login' state={{ from: location.pathname }} replace />
             )
           }
         />

@@ -12,6 +12,7 @@ import { signInWithPopup } from 'firebase/auth';
 import { auth, provider } from '../../utils/Firebase';
 import { userDataContext } from '../context/UserContext';
 import Loading from '../component/Loading';
+import { toast } from 'react-toastify';
 
 function Login() {
     let [show,setShow] = useState(false)
@@ -33,7 +34,6 @@ function Login() {
             console.log(result.data)
             await getCurrentUser()
             setLoading(false)
-            navigate("/")
             toast.success("User Login Successful")
             
         } catch (error) {
@@ -51,10 +51,12 @@ function Login() {
                 const result = await axios.post(serverUrl + "/api/auth/googlelogin" ,{name , email} , {withCredentials:true})
                 console.log(result.data)
                 await getCurrentUser()
-                navigate("/")
-    
+                setLoading(false)
+                toast.success("User Login Successful")
+                
             } catch (error) {
                 console.log(error)
+                toast.error("User Login Failed")
             }
             
         }
