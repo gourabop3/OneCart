@@ -4,7 +4,7 @@ import { FaCircle } from "react-icons/fa";
 function Hero({heroData,heroCount,setHeroCount}) {
   return (
     <div className='w-[40%] h-[100%]  relative' >
-        <div className='absolute  text-white  text-[20px] md:text-[40px] lg:text-[55px] md:left-[10%] md:top-[90px] lg:top-[130px] left-[10%] top-[10px]'>
+        <div className='absolute  text-black font-bold  text-[20px] md:text-[40px] lg:text-[55px] md:left-[10%] md:top-[90px] lg:top-[130px] left-[10%] top-[10px]'>
             <p>{heroData.text1}</p>
             <p>{heroData.text2}</p>
         </div>
