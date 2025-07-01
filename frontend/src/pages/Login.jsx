@@ -31,8 +31,8 @@ function Login() {
                 email,password
             },{withCredentials:true})
             console.log(result.data)
+            await getCurrentUser()
             setLoading(false)
-            getCurrentUser()
             navigate("/")
             toast.success("User Login Successful")
             
@@ -50,8 +50,8 @@ function Login() {
     
                 const result = await axios.post(serverUrl + "/api/auth/googlelogin" ,{name , email} , {withCredentials:true})
                 console.log(result.data)
-                getCurrentUser()
-            navigate("/")
+                await getCurrentUser()
+                navigate("/")
     
             } catch (error) {
                 console.log(error)
