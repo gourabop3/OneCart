@@ -51,7 +51,7 @@ function Orders() {
             <SiEbox  className='w-[60px] h-[60px] text-[black] p-[5px] rounded-lg bg-[white]'/>
 
             <div>
-              <div className='flex items-start justify-center flex-col gap-[5px] text-[16px] text-[#56dbfc]'>
+              <div className='flex items-start justify-center flex-col gap-[5px] text-[16px] text-white'>
                 {
                   order.items.map((item,index)=>{
                     if(index === order.items.length - 1){
@@ -65,14 +65,14 @@ function Orders() {
                 }
               </div>
 
-              <div className='text-[15px] text-green-100'>
+              <div className='text-[15px] text-white'>
                   <p>{order.address.firstName+" "+ order.address.lastName}</p>
                   <p>{order.address.street + ", "}</p>
                   <p>{order.address.city + ", " + order.address.state + ", " + order.address.country + ", " + order.address.pinCode}</p>
                   <p>{order.address.phone}</p>
                 </div>
             </div>
-            <div className='text-[15px] text-green-100'>
+            <div className='text-[15px] text-white'>
                   <p>Items : {order.items.length}</p>
                   <p>Method : {order.paymentMethod}</p>
                   <p>Payment : {order.payment ? 'Done' : 'Pending'}</p>

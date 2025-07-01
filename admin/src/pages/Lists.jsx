@@ -57,9 +57,9 @@ function Lists() {
                   <img src={item.image1} className='w-[30%] md:w-[120px] h-[90%] rounded-lg' alt="" />
                   <div className='w-[90%] h-[80%] flex flex-col items-start justify-center gap-[2px]'>
 
-                    <div className='w-[100%] md:text-[20px] text-[15px] text-[#bef0f3]'>{item.name}</div>
-                     <div className='md:text-[17px] text-[15px] text-[#bef3da]'>{item.category}</div>
-                  <div className='md:text-[17px] text-[15px] text-[#bef3da]'>₹{item.price}</div>
+                    <div className='w-[100%] md:text-[20px] text-[15px] text-white'>{item.name}</div>
+                     <div className='md:text-[17px] text-[15px] text-white'>{item.category}</div>
+                  <div className='md:text-[17px] text-[15px] text-white'>₹{item.price}</div>
 
                   </div>
                   <div className='w-[10%] h-[100%] bg-transparent flex items-center justify-center'>
