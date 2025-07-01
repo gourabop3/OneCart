@@ -2,6 +2,7 @@ import User from "../model/userModel.js";
 import validator from "validator";
 import bcrypt from "bcryptjs";
 import { genToken, genToken1 } from "../config/token.js";
+import { buildCookieOptions } from "../config/cookieOptions.js";
 
 // ✅ Registration
 export const registration = async (req, res) => {
@@ -25,12 +26,9 @@ export const registration = async (req, res) => {
     const user = await User.create({ name, email, password: hashPassword });
 
     const token = await genToken(user._id);
-    res.cookie("token", token, {
-      httpOnly: true,
-      secure: true,
-      sameSite: "none",
-      maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
-    });
+    const cookieOpts = buildCookieOptions();
+    res.cookie("token", token, cookieOpts);
+    console.log(`[REGISTRATION] Cookie issued =>`, cookieOpts);
 
     return res.status(201).json(user);
   } catch (error) {
@@ -55,12 +53,9 @@ export const login = async (req, res) => {
     }
 
     const token = await genToken(user._id);
-    res.cookie("token", token, {
-      httpOnly: true,
-      secure: true,
-      sameSite: "none",
-      maxAge: 7 * 24 * 60 * 60 * 1000,
-    });
+    const cookieOpts = buildCookieOptions();
+    res.cookie("token", token, cookieOpts);
+    console.log(`[LOGIN] Cookie issued =>`, cookieOpts);
 
     return res.status(201).json(user);
   } catch (error) {
@@ -80,12 +75,9 @@ export const googleLogin = async (req, res) => {
     }
 
     const token = await genToken(user._id);
-    res.cookie("token", token, {
-      httpOnly: true,
-      secure: true,
-      sameSite: "none",
-      maxAge: 7 * 24 * 60 * 60 * 1000,
-    });
+    const cookieOpts = buildCookieOptions();
+    res.cookie("token", token, cookieOpts);
+    console.log(`[GOOGLE] Cookie issued =>`, cookieOpts);
 
     return res.status(200).json(user);
   } catch (error) {
@@ -104,12 +96,9 @@ export const adminLogin = async (req, res) => {
       password === process.env.ADMIN_PASSWORD
     ) {
       const token = await genToken1(email);
-      res.cookie("token", token, {
-        httpOnly: true,
-        secure: true,
-        sameSite: "none",
-        maxAge: 1 * 24 * 60 * 60 * 1000, // 1 day
-      });
+      const cookieOpts = buildCookieOptions(1 * 24 * 60 * 60 * 1000);
+      res.cookie("token", token, cookieOpts);
+      console.log(`[ADMIN LOGIN] Cookie issued =>`, cookieOpts);
 
       // ✅ Return email + role so frontend can use
       return res.status(200).json({
@@ -129,11 +118,8 @@ export const adminLogin = async (req, res) => {
 // ✅ Logout
 export const logOut = async (req, res) => {
   try {
-    res.clearCookie("token", {
-      httpOnly: true,
-      secure: true,
-      sameSite: "none",
-    });
+    res.clearCookie("token", buildCookieOptions());
+    console.log("[LOGOUT] cookie cleared");
     return res.status(200).json({ message: "Logout successful" });
   } catch (error) {
     console.log("Logout error");

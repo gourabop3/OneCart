@@ -16,19 +16,39 @@ let app = express()
 
 app.use(express.json())
 app.use(cookieParser())
-app.use(cors({
- origin:["https://onecart-frontend-0bf2.onrender.com" , "https://onecart-admin-xhwa.onrender.com"],
- credentials:true
-}))
+
+// Build whitelist from env or fallback to hard-coded list
+const defaultOrigins = [
+  "https://onecart-frontend-0bf2.onrender.com",
+  "https://onecart-admin-xhwa.onrender.com",
+];
+
+const whitelist = process.env.CORS_ORIGINS
+  ? process.env.CORS_ORIGINS.split(",").map((o) => o.trim())
+  : defaultOrigins;
+
+console.log("[CORS] allowed origins:", whitelist);
+
+// Enable CORS before declaring routes
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      // Allow requests with no origin (like mobile apps or curl) or if whitelisted
+      if (!origin || whitelist.indexOf(origin) !== -1) {
+        return callback(null, true);
+      }
+      console.warn(`[CORS] Blocked request from origin: ${origin}`);
+      return callback(new Error("Not allowed by CORS"));
+    },
+    credentials: true,
+  })
+)
 
 app.use("/api/auth",authRoutes)
 app.use("/api/user",userRoutes)
 app.use("/api/product",productRoutes)
 app.use("/api/cart",cartRoutes)
 app.use("/api/order",orderRoutes)
-
-
-
 
 app.listen(port,()=>{
     console.log("Hello From Server")
